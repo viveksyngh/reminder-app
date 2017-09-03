@@ -70,13 +70,12 @@ class PasswordSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('pk', 'username', 'first_name', 'last_name', "password",)
+        fields = ("password" ,)
         extra_kwargs = {
                             "password" : {
                                 "write_only": True 
                             }
         }
-        read_only_fields = ("pk", "username", "first_name", "last_name")
 
     def update(self, instance, validated_data):
         if validated_data.get("password"):

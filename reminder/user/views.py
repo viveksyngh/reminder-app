@@ -19,17 +19,23 @@ class UserViewSet(viewsets.ModelViewSet):
 
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    
+    def parsed_query_data(self, request):
+        data = {}
+        for key, value in request.data.items():
+            data[key]=value
+        return data
 
     @detail_route(methods=['post'])
     def set_password(self, request, pk=None):
         user = self.get_object()
-        serializer = PasswordSerializer(data=request.data)
+        serializer = PasswordSerializer(data=self.parsed_query_data(request))
         if serializer.is_valid():
-            user.set_password(serializer.data['password'])
+            user.set_password(serializer.validated_data['password'])
             user.save()
             return Response({'status': 'password set'})
         else:
-            return Response(status.HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
