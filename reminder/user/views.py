@@ -7,8 +7,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import detail_route, api_view
 from rest_framework.authtoken.models import Token
 
-from .models import User
-from .serializers import UserSerializer, PasswordSerializer
+from .models import User, Account
+from .serializers import UserSerializer, PasswordSerializer, AccountSerializer
 
 # Create your views here.
 
@@ -49,4 +49,12 @@ def login(request):
         return Response({"error": "Login Failed"}, status=status.HTTP_401_UNAUTHORIZED)
     token, _ = Token.objects.get_or_create(user=user)
     return Response({"token": token.key})
+
+
+class AccountViewSet(viewsets.ModelViewSet):
+    """
+        A viewset for configuing different accounts for notifciation
+    """
+    serializer_class = AccountSerializer
+    queryset = Account.objects.all()
 

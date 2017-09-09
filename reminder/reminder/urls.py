@@ -16,11 +16,14 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from user.views import UserViewSet, login
+from user.views import UserViewSet, login, AccountViewSet
+from event.views import EventViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'users', UserViewSet, base_name='user')
+router.register(r'accounts', AccountViewSet, base_name='account')
+router.register(r'events', EventViewSet, base_name="event")
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import User
+from .models import User, Account
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -82,4 +82,21 @@ class PasswordSerializer(serializers.ModelSerializer):
             instance.set_password(validated_data["password"])
         instance.save()
         return instance
+
+
+class UserAccountSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = User
+        fields = ("first_name", "last_name", "email", "mobile_number",)
+
+
+class AccountSerializer(serializers.ModelSerializer):
+    
+    user = UserAccountSerializer()
+
+    class Meta:
+        model = Account
+        fields = ('account_id', 'account_type', "address", "user")
+
 
