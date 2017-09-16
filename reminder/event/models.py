@@ -6,8 +6,7 @@ from user.models import User
 
 
 class Event(models.Model):
-    EVENT_TYPE = (('Yearly', 'Birthday'),
-                  ('Yearly', 'Anniversary'),
+    EVENT_TYPE = (('Yearly', 'Birthday/Anniversary'),
                   ('Monthly', 'Monthly Bill'),
                   ('Onetime',  'One time event'),
                   ('Daily',   'Daily'),

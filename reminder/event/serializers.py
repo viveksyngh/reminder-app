@@ -4,10 +4,10 @@ from . import models
 
 class EventSerializer(serializers.ModelSerializer):
     
-    user = serializers.PrimaryKeyRelatedField(read_only=True)
+    # user = serializers.PrimaryKeyRelatedField()
 
     class Meta:
         model = models.Event
-        fields = ('event_id', 'name', 'description', 'event_type', 'day',
+        fields = ('event_id', 'name', 'description', 'frequency', 'event_type', 'day',
                   'month', 'year', 'hour', 'minute', 'created_on', 'user')
         

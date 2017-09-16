@@ -37,10 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'user',
-    'event',
     'rest_framework',
     'rest_framework.authtoken',
+    'djcelery',
+    'user',
+    'event',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,13 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'user.User'
+
+# CELRY CONFIG
+
+BROKER_URL = 'redis://localhost:6379/0'
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_IGNORE_RESULT = True
+CELERY_APP_NAME = 'reminder_celery'
